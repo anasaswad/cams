@@ -1,10 +1,11 @@
-import {FETCH_CAMS, PLAY_CAM, START_FETCH_CAMS} from '../actions/types';
+import {FETCH_CAMS, PLAY_CAM, START_FETCH_CAMS, FETCH_CAMS_ERROR} from '../actions/types';
 
 const initialState = {
   cams : [],
   isLoading: true,
   fetching: false,
-  activeCam : {}
+  activeCam : {},
+  error: '',
 }
 
 
@@ -16,11 +17,19 @@ export default function (state = initialState, action){
         cams: action.payload,
         isLoading: false,
         fetching: false,
+        error: ''
       };
     case START_FETCH_CAMS:
       return {
         ...state,
         fetching: true,
+      }
+    case FETCH_CAMS_ERROR:
+      return {
+        ...state,
+        fetching: false,
+        isLoading: false,
+        error: action.payload,
       }
     case PLAY_CAM:
       return state;

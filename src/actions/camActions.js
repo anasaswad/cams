@@ -1,6 +1,6 @@
 import {Alert} from 'react-native';
 import fetchWithDigest from 'react-native-digest-fetch';
-import {FETCH_CAMS, PLAY_CAM, START_FETCH_CAMS} from './types';
+import {FETCH_CAMS, PLAY_CAM, START_FETCH_CAMS,FETCH_CAMS_ERROR} from './types';
 import {API, CDN} from '../config';
 import digestAuthRequest from 'digest-auth-request';
 
@@ -27,11 +27,9 @@ export const fetchCAMS = () =>  dispatch => {
           type: FETCH_CAMS,
           payload: data.instanceList[0].incomingStreams.map( camFetchMapper )
         });
-
-      Alert.alert(data.message);
-
+      dispatch({type: FETCH_CAMS_ERROR, payload: `Server response ERROR: ${data.message}`});
     })
     .catch( err => {
-      Alert.alert(err.message)
+      dispatch({type: FETCH_CAMS_ERROR, payload: err.message});
     });
 };

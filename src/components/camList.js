@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, Text, TouchableOpacity, FlatList, SafeAreaView,Image } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity,
+  FlatList, SafeAreaView,Image
+} from 'react-native';
 import {Video} from 'expo';
 import { Metrics, Styles } from '@theme';
 import {connect} from 'react-redux';
 import Navbar from './Navbar';
 import {fetchCAMS} from '../actions/camActions';
+import Notificationbar from './Notificationbar';
 import { Images } from '@theme';
 import PTRView from 'react-native-pull-to-refresh';
+import {API} from '../config';
 
 
 
@@ -18,11 +22,13 @@ class CamList extends Component{
     this.refresh = this.refresh.bind(this);
     this.LoadingResolve = ()=>{};
     this.refreshInterval = undefined;
+    this.state = {
+    };
   }
 
   componentDidMount() {
     this.props.fetchCAMS();
-    this.refreshInterval = setInterval(this.props.fetchCAMS.bind(this), 3000);
+    this.refreshInterval = setInterval(this.props.fetchCAMS.bind(this), API.pullInterval);
   }
 
   componentWillUnmount() {
@@ -45,7 +51,6 @@ class CamList extends Component{
   }
 
   renderCamera = ({item, index}) => {
-    const program = item;
     return (
       <View style={styles.itemView}>
         <Text style={styles.camTitle}>{item.name}</Text>
@@ -88,6 +93,9 @@ class CamList extends Component{
         />
       :
       <SafeAreaView style={{ flex: 1, width: '100%'}}>
+        <Notificationbar hide={this.props.error ===''} style={styles.Notificationbar}>
+          <Text style={{fontSize: 18, color: 'white' }}>{this.props.error}</Text>
+        </Notificationbar>
         <PTRView onRefresh={this.refresh} >
           <View style={{ flex: 1, marginTop: 10}}>
             <FlatList
@@ -118,17 +126,23 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     height: Metrics.screenWidth / 16 * 9,
     width: Metrics.screenWidth,
+  },
+  Notificationbar:{
+    backgroundColor: 'red',
+    padding: 5,
   }
 });
 
 CamList.propTypes = {
   fetchCAMS: PropTypes.func.isRequired,
   cams: PropTypes.array.isRequired,
+  error: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   cams: state.cams.cams,
   isLoading: state.cams.isLoading,
   isFetching: state.cams.fetching,
+  error: state.cams.error,
 });
 export default connect(mapStateToProps, {fetchCAMS})(CamList);
