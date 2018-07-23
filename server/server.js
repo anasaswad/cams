@@ -11,7 +11,7 @@ app.listen(8080, () => console.log('Example app listening on port 8080!'));
 app.get('/cams', (req, res) => {
   restClient.request({
       host: 'streaming.alaan.tv',
-      path: '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/lowlatency/instances',
+      path: '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/livefc/instances',
       port: 8087,
       method: 'GET',
       headers: { "Content-Type": "application/json; charset=utf-8", "Accept": "application/json; charset=utf-8" }
