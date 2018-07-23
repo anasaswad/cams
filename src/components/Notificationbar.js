@@ -35,7 +35,6 @@ Notificationbar.propTypes = {
       PropTypes.element,
     ])),
   ]).isRequired,
-  style: View.propTypes.style,
   hide: PropTypes.bool,
 };
 
