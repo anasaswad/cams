@@ -6,7 +6,7 @@ const API = {
 const CDN = {
   domain: 'streaming.alaan.tv',
   https: false,
-  path: '/lowlatency',
+  path: '/livecf',
 };
 
 export {
