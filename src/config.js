@@ -1,12 +1,12 @@
 const API = {
-  domain: 'localhost',
+  domain: 'streaming.alaan.tv',
   port: '8080'
 };
 
 const CDN = {
-  domain: 'live.cdn.alaan.tv',
+  domain: 'streaming.alaan.tv',
   https: false,
-  path: '',
+  path: '/lowlatency',
 };
 
 export {

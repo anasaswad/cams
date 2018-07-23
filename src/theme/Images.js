@@ -8,6 +8,7 @@ const images = {
 	googleplus: require('@assets/googleplus.png'),
 	twitter: require('@assets/twitter.png'),
 	right: require('@assets/right.png'),
+	background: require('@assets/background.jpg'),
 };
 
 export default images;
