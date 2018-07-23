@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet, Text, TouchableOpacity,
   FlatList, SafeAreaView,Image
 } from 'react-native';
-import {Video} from 'expo';
+import Video from 'react-native-video';
 import { Metrics, Styles } from '@theme';
 import {connect} from 'react-redux';
 import Navbar from './Navbar';
@@ -56,15 +56,13 @@ class CamList extends Component{
         <Text style={styles.camTitle}>{item.name}</Text>
         <Video
           source={{ uri: item.url }}
-          posterSource = {Images.logo}
+          oster = {Images.logo}
           rate={1.0}
           volume={1.0}
-          isMuted={false}
-          resizeMode="cover"
-          shouldPlay = {false}
+          muted={false}
+          resizeMode={"cover"}
+          repeat={false}
           style={styles.videoThum}
-          useNativeControls
-          usePoster
         />
       </View>
     )
