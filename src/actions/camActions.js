@@ -1,8 +1,5 @@
-import {Alert} from 'react-native';
-import fetchWithDigest from 'react-native-digest-fetch';
 import {FETCH_CAMS, PLAY_CAM, START_FETCH_CAMS,FETCH_CAMS_ERROR} from './types';
 import {API, CDN} from '../config';
-import digestAuthRequest from 'digest-auth-request';
 
 
 const camFetchMapper = function(entry){
@@ -10,7 +7,8 @@ const camFetchMapper = function(entry){
     name: entry.name,
     sourceIp: entry.sourceIp,
     isConnected: entry.isConnected,
-    url: `${CDN.https ? 'https' : 'http'}://${CDN.domain}${CDN.path}/${entry.name}/playlist.m3u8?DVR`
+    url: `${CDN.https ? 'https' : 'http'}://${CDN.domain}${CDN.path}/${entry.name}/playlist.m3u8?DVR`,
+    paused: true
   };
 }
 

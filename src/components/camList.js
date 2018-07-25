@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, Text, TouchableOpacity,
-  FlatList, SafeAreaView,Image
+  FlatList, SafeAreaView,Image,Vibration
 } from 'react-native';
 import Video from 'react-native-video';
 import { Metrics, Styles } from '@theme';
@@ -12,6 +12,8 @@ import Notificationbar from './Notificationbar';
 import { Images } from '@theme';
 import PTRView from 'react-native-pull-to-refresh';
 import {API} from '../config';
+
+const VIBRATION_PATTERN = [1000, 2000, 3000];
 
 
 
@@ -47,22 +49,30 @@ class CamList extends Component{
     if( nextProps.isFetching === false && this.props.isFetching === true ){
       this.LoadingResolve();
       this.LoadingResolve = ()=>{};
+      Vibration.vibrate(VIBRATION_PATTERN, true);
     }
+
+    this.setState((prev)=>{
+
+    });
   }
 
   renderCamera = ({item, index}) => {
+
     return (
       <View style={styles.itemView}>
         <Text style={styles.camTitle}>{item.name}</Text>
         <Video
           source={{ uri: item.url }}
-          oster = {Images.logo}
+          poster = {'https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif' }
           rate={1.0}
           volume={1.0}
           muted={false}
           resizeMode={"cover"}
           repeat={false}
           style={styles.videoThum}
+          paused={item.status}
+          controls={true}
         />
       </View>
     )
