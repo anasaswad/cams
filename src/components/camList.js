@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, Text, TouchableOpacity,
-  FlatList, SafeAreaView,Image,Vibration
+  FlatList, SafeAreaView,Image
 } from 'react-native';
-import Video from 'react-native-video';
+import Video from './VideoPlayer';
 import { Metrics, Styles } from '@theme';
 import {connect} from 'react-redux';
 import Navbar from './Navbar';
@@ -12,8 +12,6 @@ import Notificationbar from './Notificationbar';
 import { Images } from '@theme';
 import PTRView from 'react-native-pull-to-refresh';
 import {API} from '../config';
-
-const VIBRATION_PATTERN = [1000, 2000, 3000];
 
 
 
@@ -49,7 +47,6 @@ class CamList extends Component{
     if( nextProps.isFetching === false && this.props.isFetching === true ){
       this.LoadingResolve();
       this.LoadingResolve = ()=>{};
-      Vibration.vibrate(VIBRATION_PATTERN, true);
     }
 
     this.setState((prev)=>{
@@ -63,16 +60,9 @@ class CamList extends Component{
       <View style={styles.itemView}>
         <Text style={styles.camTitle}>{item.name}</Text>
         <Video
-          source={{ uri: item.url }}
-          poster = {'https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif' }
-          rate={1.0}
-          volume={1.0}
-          muted={false}
-          resizeMode={"cover"}
-          repeat={false}
+          url={item.url }
           style={styles.videoThum}
-          paused={item.status}
-          controls={true}
+          paused={ item.paused }
         />
       </View>
     )

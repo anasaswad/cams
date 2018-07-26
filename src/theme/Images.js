@@ -9,6 +9,7 @@ const images = {
 	twitter: require('@assets/twitter.png'),
 	right: require('@assets/right.png'),
 	background: require('@assets/background.jpg'),
+	loading: require('@assets/loading.gif'),
 };
 
 export default images;
