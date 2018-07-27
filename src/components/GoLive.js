@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { View, Image, StyleSheet, TouchableHighlight } from 'react-native';
+import { Platform, View, Image, StyleSheet, TouchableHighlight } from 'react-native';
 import BroadcastView from 'react-native-wowza-gocoder';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -14,7 +14,7 @@ class GoLive extends Component{
       username:'',
       password:'',
       streamName:'iOS-' + Math.round(Math.random()*1000) ,
-      sdkLicenseKey:'GOSK-6745-010F-DCB5-A9A9-BBE7'
+      sdkLicenseKey: Platform.OS === 'ios' ? 'GOSK-6745-010F-DCB5-A9A9-BBE7' : 'GOSK-6745-010F-AEDC-AC33-DD7D'
     };
     this.state={
       broadcasting: false

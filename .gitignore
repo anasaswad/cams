@@ -20,3 +20,10 @@ yarn.lock
 
 # xcode build
 ios/build
+
+
+# android
+android/app/build/
+android/build/
+.gradle/
+.idea/
