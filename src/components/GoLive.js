@@ -154,7 +154,7 @@ export default class GoLive extends Component {
   }
 
   _broadcastVideoFrameEncoded = (time) => {
-    this.setState({recordingTime: this._formatCurrentTime(time.encoded)}, () => {
+    this.setState({recordingTime: this._formatCurrentTime(time.seconds)}, () => {
       console.log(this.state.recordingTime);
     });
   }
@@ -166,7 +166,6 @@ export default class GoLive extends Component {
   }
 
   _formatCurrentTime(currentTime) {
-    console.log(`time: ${currentTime}`);
     let time = Number(currentTime);
     var h = Math.floor(time / 3600);
     var m = Math.floor(time % 3600 / 60);

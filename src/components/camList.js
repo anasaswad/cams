@@ -78,7 +78,7 @@ class CamList extends Component{
         <Text style={styles.camTitle}>{item.name}</Text>
         <Video
           url={item.url }
-          style={{ alignSelf: 'stretch', width: this.state.videoSize.width, height: this.state.videoSize.height}}
+          style={[styles.videoItem, { width: this.state.videoSize.width, height: this.state.videoSize.height}]}
           paused={ item.paused }
         />
       </View>
@@ -111,9 +111,12 @@ class CamList extends Component{
         <Notificationbar hide={this.props.error ===''} style={styles.Notificationbar}>
           <Text style={{fontSize: 18, color: 'white' }}>{this.props.error}</Text>
         </Notificationbar>
-        <PTRView onRefresh={this.refresh} >
-          <View style={{ flex: 1, marginTop: 10}}>
-            <FlatList
+        <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, margin: 0}}>
+          <Text style={styles.listTitle}>Live CAMs</Text>
+        </View>
+        <PTRView onRefresh={this.refresh} style={{ flex: 1, backgroundColor: 'lightgray'}}>
+          <View>
+            <FlatList style={{marginTop: 10}}
               data={this.props.cams}
               renderItem={this.renderCamera}
               keyExtractor={(item, index) => item.name }
@@ -128,7 +131,25 @@ class CamList extends Component{
 
 const styles = StyleSheet.create({
   itemView: {
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    paddingTop: 20,
+    paddingBottom: 15,
+    paddingRight: 5,
+    paddingLeft: 5,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+    backgroundColor: '#FFFFFF'
+  },
+  listTitle:{
+    fontSize: 18,
+    fontWeight: 'bold',
+    padding: 10,
+    backgroundColor: 'lightgray'
+  },
+  videoItem:{
+    alignSelf: 'stretch',
+    marginLeft: -5,
   },
   camTitle: {
     fontSize: 18,

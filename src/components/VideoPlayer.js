@@ -41,7 +41,7 @@ class VideoPlayer extends Component{
   };
 
   onProgress = data => {
-    console.log('onProgress', data);
+
     const { isLoading, playerState } = this.state;
     // Video Player will continue progress even if the video already ended
     if (!isLoading && playerState !== PLAYER_STATES.ENDED) {
@@ -104,15 +104,15 @@ class VideoPlayer extends Component{
   }
 
   render(){
+    console.log('paused', this.state.paused);
     return (
       <View style={this.props.style}>
         <Video key={this.state.retry} ref={(ref) => this.player = ref }
         style={{position: 'absolute', top: 0, right: 0, left: 0, botttom: 0}}
         source={{ uri: this.props.url }}
         rate={1.0}
-        volume={1.0}
         muted={false}
-        resizeMode={"contain"}
+        resizeMode={"cover"}
         repeat={false}
         paused={ this.state.paused }
         controls={false}
