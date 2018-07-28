@@ -104,7 +104,6 @@ class VideoPlayer extends Component{
   }
 
   render(){
-    console.log('paused', this.state.paused);
     return (
       <View style={this.props.style}>
         <Video key={this.state.retry} ref={(ref) => this.player = ref }

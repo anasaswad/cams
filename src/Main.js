@@ -18,7 +18,7 @@ const AppNavigator = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Home') {
-          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+          iconName = `ios-home${focused ? '' : '-outline'}`;
         } else if (routeName === 'GoLive') {
           iconName = `ios-videocam${focused ? '' : ''}`;
         }
