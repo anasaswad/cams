@@ -42,7 +42,10 @@ export default class GoLive extends Component {
 
       this.setState({
         permissionGranted:permissionGranted
-      })
+      });
+      setTimeout( ()=> this.setState({
+        frontCamera: true
+      }) , 500);
     })
   }
   _requestPermissions() {
@@ -90,7 +93,7 @@ export default class GoLive extends Component {
                        username={StreamingEngine.username}
                        password={StreamingEngine.password}
                        backgroundMode={false}
-                       sizePreset={3}
+                       sizePreset={2}
                        broadcasting={this.state.broadcasting}
                        muted={this.state.muted}
                        flashOn={this.state.flashEnabled}
