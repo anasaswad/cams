@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, Text, TouchableOpacity,
-  FlatList, SafeAreaView,Image
+  FlatList, SafeAreaView,Image, Dimensions
 } from 'react-native';
 import Video from './VideoPlayer';
 import { Metrics, Styles } from '@theme';
@@ -22,16 +22,33 @@ class CamList extends Component{
     this.refresh = this.refresh.bind(this);
     this.LoadingResolve = ()=>{};
     this.refreshInterval = undefined;
+    let dim = Dimensions.get('window');
     this.state = {
+      videoSize:{
+        width: dim.width,
+        height: this.calcVideoHeight(dim.width)
+      }
     };
+    this.onResize = this.onResize.bind(this);
+  }
+  calcVideoHeight(width){
+    return width * 9 / 16;
+  }
+  onResize(size){
+    this.setState({videoSize:{
+      width: size.window.width,
+      height: this.calcVideoHeight(size.window.width)
+    }});
   }
 
   componentDidMount() {
     this.props.fetchCAMS();
     this.refreshInterval = setInterval(this.props.fetchCAMS.bind(this), API.pullInterval);
+    Dimensions.addEventListener('change', this.onResize );
   }
 
   componentWillUnmount() {
+    Dimensions.removeEventListener('change', this.onResize );
     if( this.refreshInterval )
       clearInterval(this.refreshInterval);
   }
@@ -61,7 +78,7 @@ class CamList extends Component{
         <Text style={styles.camTitle}>{item.name}</Text>
         <Video
           url={item.url }
-          style={styles.videoThum}
+          style={{ alignSelf: 'stretch', width: this.state.videoSize.width, height: this.state.videoSize.height}}
           paused={ item.paused }
         />
       </View>
@@ -119,11 +136,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: 'black',
     fontWeight: '500'
-  },
-  videoThum:{
-    alignSelf: 'stretch',
-    height: Metrics.screenWidth / 16 * 9,
-    width: Metrics.screenWidth,
   },
   Notificationbar:{
     backgroundColor: 'red',

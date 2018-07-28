@@ -29,7 +29,7 @@ export default class GoLive extends Component {
       frontCamera:false,
       recordingTime: '00:00:00',
       recordButtonImage: RecordImage,
-      permissionGranted:false
+      permissionGranted:false,
     }
   }
   componentDidMount(){
@@ -135,6 +135,10 @@ export default class GoLive extends Component {
 
   _broadcastDidFailToStart = (error) =>{
     console.log('Failed to broadcast: ', error);
+    Alert.alert(
+        'Failed to broadcast',
+        `Failed to broadcast your broadcast, error: ${error}`
+    );
   }
 
   _broadcastStatusDidChange = (status) => {
@@ -146,7 +150,7 @@ export default class GoLive extends Component {
   }
 
   _broadcastDidReceiveError = (error) =>{
-
+    console.error(error);
   }
 
   _broadcastVideoFrameEncoded = (time) => {
