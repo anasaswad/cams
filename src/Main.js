@@ -20,7 +20,7 @@ const AppNavigator = createBottomTabNavigator(
         if (routeName === 'Home') {
           iconName = `ios-information-circle${focused ? '' : '-outline'}`;
         } else if (routeName === 'GoLive') {
-          iconName = `ios-microphone${focused ? '' : ''}`;
+          iconName = `ios-videocam${focused ? '' : ''}`;
         }
 
         // You can return any component that you like here! We usually use an
@@ -30,7 +30,7 @@ const AppNavigator = createBottomTabNavigator(
     }),
     tabBarOptions: {
       activeTintColor: 'tomato',
-      inactiveTintColor: '#800080',
+      inactiveTintColor: '#FF0000',
     },
   }
 );

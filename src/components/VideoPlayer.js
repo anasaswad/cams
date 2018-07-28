@@ -112,7 +112,7 @@ class VideoPlayer extends Component{
         source={{ uri: this.props.url }}
         rate={1.0}
         muted={false}
-        resizeMode={"cover"}
+        resizeMode={"contain"}
         repeat={false}
         paused={ this.state.paused }
         controls={false}
