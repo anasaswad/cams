@@ -17,7 +17,13 @@
 {
   NSURL *jsCodeLocation;
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  #if DEBUG
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+    NSLog(@"Using Debug Bundle");
+  #else
+    jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+    NSLog(@"Using Production Bundle");
+  #endif
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"aishalaan"
@@ -31,6 +37,17 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+  
+  #if DEBUG
+    NSLog(@"React Native Splash Screen");
+  #else
+    UIView* launchScreenView = [[[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil] objectAtIndex:0];
+    launchScreenView.frame = self.window.bounds;
+    rootView.loadingView = launchScreenView;
+    NSLog(@"Launching Splash Screen");
+  #endif
+  
+  
   return YES;
 }
 
