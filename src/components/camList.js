@@ -107,7 +107,7 @@ class CamList extends Component{
           source={Images.background}
         />
       :
-      <SafeAreaView style={{ flex: 1, width: '100%'}}>
+      <SafeAreaView style={{ flex: 1, width: '100%', backgroundColor: '#4267b2'}}>
         <Notificationbar hide={this.props.error ===''} style={styles.Notificationbar}>
           <Text style={{fontSize: 18, color: 'white' }}>{this.props.error}</Text>
         </Notificationbar>
@@ -144,12 +144,13 @@ const styles = StyleSheet.create({
   listTitle:{
     fontSize: 18,
     fontWeight: 'bold',
+    color: 'white',
     padding: 10,
-    backgroundColor: 'lightgray'
+    backgroundColor: '#4267b2'
   },
   videoItem:{
     alignSelf: 'stretch',
-    marginLeft: -5,
+    marginLeft: -6,
   },
   camTitle: {
     fontSize: 18,

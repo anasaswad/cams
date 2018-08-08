@@ -100,7 +100,7 @@ class VideoPlayer extends Component{
   }
 
   onBuffer = (data)=>{
-    this.setState({isBuffering: data.isBuffering });
+
   }
 
   render(){
@@ -119,7 +119,7 @@ class VideoPlayer extends Component{
         onPlaybackStalled={ (data)=> console.log('onPlaybackStalled',data)}
         onPlaybackResume={ (data)=> console.log('onPlaybackResume',data)}
         onTimedMetadata={ (data)=> console.log('onTimedMetadata', data)}
-        onPlaybackRateChange={ (data)=> console.log('onPlaybackRateChange', data)}
+        onPlaybackRateChange={ (data)=> this.setState({isBuffering: data.playbackRate === 0 &&  !this.state.paused }) }
         onFullscreenPlayerWillDismiss = {this.onFullscreenPlayerWillDismiss}
         onBuffer={this.onBuffer}
         onLoad={this.onLoad.bind(this)}
